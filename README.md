@@ -22,3 +22,7 @@ I did my first playtests with WebGL Unity builds, but I think gameplay will flow
 - Third party API - Random bible verses on death
 - Database - manage accounts, track lobbies and game state
 - WebSocket - push game updates for devices, start turn when previous player ends theirs
+
+![image](https://github.com/user-attachments/assets/2f29444e-0c59-416f-a663-da33f1fdacdc)
+![image](https://github.com/user-attachments/assets/b5c8c19e-2606-4325-bbad-f883f691b85e)
+![image](https://github.com/user-attachments/assets/5963ac66-fd27-4650-ba40-b62a7ed1ab66)
