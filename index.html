@@ -2,21 +2,41 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <title>Bloodbath</title>
-  <meta name="author" content="">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>Bloodbath</title>
+    <link rel="icon" type="image/x-icon" href="/images/bloodbath-favicon.ico">
+    <meta name="author" content="ZapTerra">
+    <meta name="description" content="Humans don’t have hit points, they have blood pressure. Bloodbath is a fast-paced, 2-5 player card game where each player is a blood mage looking to be the last one left standing.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
+<header>
+    <button>Login</button>
+    <button>Lobbies</button>
+    <button>Lplay</button>
+</header>
 
 <body>
+    <h1>Bloodbath</h1>
+    <p>login</p>
+    <form action="index.html" method = "post">
+        <fieldset>
+            <label for="username">Mage Name:</label>
+            <input type="text" name="username" id="username" placeholder="mage title" required pattern="^[a-zA-Z0-9_]+$"/>
+            <br>
+            <label for="password">Pass Phrase:</label>
+            <input type="password" name="password" id="password" placeholder="arcane key" pattern="^(?!\s*$).+">
+        </fieldset>
+    </form>
 
-  <p>Hello, world!</p>
-
-  <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
+<footer>
+    <p>Christian Hall 2025</p>
+    <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
+</footer>
 
 </html>
 </body>
