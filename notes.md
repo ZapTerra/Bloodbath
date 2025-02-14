@@ -1,0 +1,1 @@
+Meters are super cool! I didn't know about them before! Setting the 'optimum' number at the upper or lower third of the range defined by the 'high' and 'low' values makes it go red when the value is all the way in the other third! That's cool!
