@@ -12,35 +12,39 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <header>
-    <a href="index.html">
+    <a href="../index.html">
         <button>Login</button>
     </a>
-    <a href="pages/lobbies.html">
+    <a href="lobbies.html">
     <button>Lobbies</button>
     </a>
-    <a href="pages/game.html">
+    <a href="game.html">
         <button>Lplay</button>
     </a>
-    <a href="pages/stats.html">
+    <a href="stats.html">
         <button>Logistics</button>
     </a>
 </header>
 
 <body bgcolor="blood">
     <h1>Bloodbath</h1>
-    <p>login</p>
-    <form action="index.html" method = "post">
-        <fieldset>
-            <label for="username">Mage Name:</label>
-            <input type="text" name="username" id="username" placeholder="mage title" required pattern="^[a-zA-Z0-9_]+$"/>
-            <br>
-            <label for="password">Pass Phrase:</label>
-            <input type="password" name="password" id="password" placeholder="arcane key" pattern="^(?!\s*$).+">
-            <br>
-            <button id="login-button">Enter</button>
-        </fieldset>
-    </form>
-
+    
+    <div id="special-actions">
+        <button>Blood Drive</button>
+        <button>Hemokeratosis</button>
+        <button>Plasma Barrier</button>
+    </div>
+    <img src="../images/bloodpressurehourglassspritesheet.png"></img>
+    <br>
+    <p2>Blood Pressure:</p2>
+    <meter value="50" min="0" max="100" low="33" high="66" optimum="100"></meter>
+    <div id="wound-tracker">
+        <img src="../images/arrow.png">
+        <button id="sub-wounds">-</button>
+        <span id="wound-count">5</span>
+        <button id="add-wounds">+</button>
+        <img src="../images/arrow.png">
+    </div>
     <script src="js/script.js"></script>
 </body>
 
