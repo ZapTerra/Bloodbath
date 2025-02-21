@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Alagard';
+    src: url('/font/alagard.eot'); /* IE9 Compat Modes */
+    src: url('/font/alagard.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/font/.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/font/alagard.woff') format('woff'), /* Modern Browsers */
+         url('/font/alagard.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('/font/alagard.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+body {
+    font-family: 'Alagard', Fallback, sans-serif;
+    margin: 0%;
+    position: relative; /* Ensure it acts as a container for the pseudo-element */
+    overflow: hidden; /* Prevents unwanted scrollbars */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Keeps background in place */
+    top: -5%;
+    left: -5%;
+    width: 110vw;
+    height: 110vh;
+    background-image: url('/images/erythrocytes.jpg');
+    background-color: #F64F4F;
+    background-blend-mode: soft-light;
+    background-size: 800px;
+    filter: url(#distort); /* Apply SVG filter here */
+    z-index: -1; /* Sends it behind content */
+}
+
+button {
+    font-family: 'Alagard', Fallback, sans-serif;
+    font-size: 1.5em;
+    background-color: transparent;
+    border: transparent;
+}
+
+header {
+    font-family: 'Alagard', Fallback, sans-serif;
+    background-color: #780606;
+    padding: 2%;
+    margin: 0%;
+    display: flex;
+    justify-content:space-evenly;
+}
+
+main {
+    margin: 2%;
+}
+
+footer {
+    padding: 2%;
+    padding-top: 0%;;
+    text-align: center;
+    text-shadow: 0 0 5px #F64F4F;
+    background-image: linear-gradient(90deg,#EA0C0C,#780606,#780606,#780606,#EA0C0C);
+    bottom: 0%;
+    position: fixed;
+    width: 110%;
+    left: -5%;
+}
+
+#login-titleplate {
+    color: rgb(50, 0, 0);
+    background-color: #F42929;
+    border-radius: 1em;
+    padding: .25em;
+    margin: 0em;
+    margin-left: .25em;
+    box-shadow: 0px 0px 10px .5px black;
+    display: flex;
+    width: fit-content;
+}
+
+form {
+    background-color: #780606;
+    border-radius: 1em;
+    padding: 1em;
+    padding-bottom: 0;
+    box-shadow: 5px 5px 10px inset;
+}
+
+fieldset {
+    border-width: 0;
+    border-radius: 1em;
+    background-color: #F64F4F;
+    padding: .5em;
+    text-shadow: 0 0 3px #780606;
+    box-shadow: 5px 5px 10px ;
+}
+
+input {
+    margin: .5em;
+    border-width: 4px;
+    font-family: Alagard;
+    text-shadow: 0 0 3px #780606;
+}
+
+input:focus {
+  border-style: solid;
+  border-image: conic-gradient(from var(--angle), #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606, #EA0C0C, #780606) 1;
+  outline: none;
+  animation: 60s rotate linear infinite;
+}
+@keyframes rotate {
+    0%{
+        --angle: 0deg;
+    }
+    100%{
+        --angle: 360deg;
+    }
+}
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+input, textarea {
+    background-color: #FA9B9B;
+    border-color: #F64F4F;
+    color:#EA0C0C
+}
+
+::placeholder {
+    color: #EA0C0C;
+}
+
+
+#login-button {
+    color: #780606;
+    margin: 1em;
+    background-color: #F64F4F;
+    border-radius: .25em;
+    border-color: #F64F4F;
+}
+
+#login-button:active {
+    color: #F64F4F;
+    background-color: #780606;
+    border-radius: .25em;
+    border-color: #780606;
+}
+
+
