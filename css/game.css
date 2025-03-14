@@ -1,18 +1,19 @@
 .hourglass-container {
-    position: absolute;
+    width: 100vw;
+    height: 50vh;
     display: flex;
-    justify-self: center;
-    width: 800px;
-    height: 2700px;
-    overflow: clip;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 .hourglass-element {
+    top: 10%;
     position: absolute;
-    top: 0;
-    left: 0;
     width: auto;
-    height: 60%;
+    height: 100%;
+    border-radius: 2em;
+    padding: 2.5em;
 }
 
 .mask-upper { z-index: 9; }
@@ -50,14 +51,23 @@
     }
 }
 
+.sand-upper-container, .sand-lower-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .sand-upper {
     z-index: 6;
-    animation: sand-move-upper 12s infinite alternate linear;
+    animation: sand-move-upper 60s infinite alternate linear;
 }
 
 .sand-lower {
     z-index: 8;
-    animation: sand-move-lower 12s infinite alternate linear;
+    animation: sand-move-lower 60s infinite alternate linear;
 }
 
 @keyframes sand-move-upper {
@@ -68,10 +78,37 @@
 
 @keyframes sand-move-lower {
     0% { transform: translateY(25%); opacity: 0; }
-    9% { opacity: 0; }
-    10% { opacity: 1; }
+    15% { opacity: 0; }
+    16% { opacity: 1; }
     50% { transform: translateY(0); }
-    89% { opacity: 1; }
-    90% {opacity: 0; }
+    84% { opacity: 1; }
+    85% {opacity: 0; }
     100% { transform: translateY(25%); opacity: 0; }
+}
+
+.wound-tracker {
+    margin-top: 8vh;
+    background-color: darkred;
+    width: auto;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.wound-increment {
+    width: 5vh;
+    height: auto;
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+.sub-wounds {
+    transform: scaleX(-1);
+}
+
+.wound-count {
+    font-size: 7em;
 }

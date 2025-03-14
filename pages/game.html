@@ -1,72 +1,92 @@
 <!DOCTYPE html>
 <html>
 <body>
-<head>
-    <meta charset="utf-8">
-    <title>Bloodbath</title>
-    <link rel="icon" type="image/x-icon" href="/images/bloodbath-favicon.ico">
-    <meta name="author" content="ZapTerra">
-    <meta name="description" content="Humans don’t have hit points, they have blood pressure. Bloodbath is a fast-paced, 2-5 player card game where each player is a blood mage looking to be the last one left standing.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <title>Bloodbath</title>
+        <link rel="icon" type="image/x-icon" href="/images/bloodbath-favicon.ico">
+        <meta name="author" content="ZapTerra">
+        <meta name="description" content="Humans don’t have hit points, they have blood pressure. Bloodbath is a fast-paced, 2-5 player card game where each player is a blood mage looking to be the last one left standing.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/game.css" rel="stylesheet">
-</head>
-<header>
-    <a href="../index.html">
-        <button>Login</button>
-    </a>
-    <a href="lobbies.html">
-    <button>Lobbies</button>
-    </a>
-    <a href="game.html">
-        <button>Lplay</button>
-    </a>
-    <a href="stats.html">
-        <button>Logistics</button>
-    </a>
-</header>
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="/css/game.css" rel="stylesheet">
+    </head>
+    <header>
+        <a href="index.html">
+            <button id="header-button">Login</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="pages/lobbies.html">
+            <button id="header-button">Lobbies</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="pages/game.html">
+            <button id="header-button">Lplay</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="pages/stats.html">
+            <button id="header-button">Logistics</button>
+        </a>
+    </header>
+    <div id="bar-drip"></div>
     <h1>Bloodbath</h1>
-    
+
     <div id="special-actions">
         <button>Blood Drive</button>
         <button>Hemokeratosis</button>
         <button>Plasma Barrier</button>
     </div>
-
-    <div class="hourglass-container">
-        <img src="/images/game/hourglass/hourglass-body.png" class="hourglass-element hourglass-body">
-        <img src="/images/game/hourglass/bg-upper.png" class="hourglass-element bg-upper">
-        <img src="/images/game/hourglass/bg-lower.png" class="hourglass-element bg-lower">
-        <img src="/images/game/hourglass/sand-stream.png" class="hourglass-element sand-stream">
-        <img src="/images/game/hourglass/sand-stream.png" class="hourglass-element sand-stream-2">
+        <div class="hourglass-container">
+            <img src="/images/game/hourglass/hourglass-body.png" class="hourglass-element hourglass-body">
+            <img src="/images/game/hourglass/bg-upper.png" class="hourglass-element bg-upper">
+            <img src="/images/game/hourglass/bg-lower.png" class="hourglass-element bg-lower">
+            <img src="/images/game/hourglass/sand-stream.png" class="hourglass-element sand-stream">
+            <img src="/images/game/hourglass/sand-stream.png" class="hourglass-element sand-stream-2">
+            
+            <div class="sand-upper-container">
+                <img src="/images/game/hourglass/sand-upper.png" class="hourglass-element sand-upper">
+            </div>
         
-        <div class="sand-upper-container">
-            <img src="/images/game/hourglass/sand-upper.png" class="hourglass-element sand-upper">
+            <div class="sand-lower-container">
+                <img src="/images/game/hourglass/sand-lower.png" class="hourglass-element sand-lower">
+            </div>
+            
+            <img src="/images/game/hourglass/mask-upper.png" class="hourglass-element mask-upper">
+            <img src="/images/game/hourglass/mask-lower.png" class="hourglass-element mask-lower">
+        </div> 
+        <div class="wound-tracker">
+            <img src="../images/game/arrow.png" class="wound-increment sub-wounds">
+            <span class="wound-count">5</span>
+            <img src="../images/game/arrow.png" class="wound-increment add-wounds">
         </div>
-    
-        <div class="sand-lower-container">
-            <img src="/images/game/hourglass/sand-lower.png" class="hourglass-element sand-lower">
-        </div>
-        
-        <img src="/images/game/hourglass/mask-upper.png" class="hourglass-element mask-upper">
-        <img src="/images/game/hourglass/mask-lower.png" class="hourglass-element mask-lower">
-    </div> 
-
-    <br>
-    <p2>Blood Pressure:</p2>
-    <meter value="50" min="0" max="100" low="33" high="66" optimum="100"></meter>
-    <div id="wound-tracker">
-        <img src="../images/arrow.png">
-        <button id="sub-wounds">-</button>
-        <span id="wound-count">5</span>
-        <button id="add-wounds">+</button>
-        <img src="../images/arrow.png">
     </div>
     <script src="js/script.js"></script>
-<footer>
-    <p>Christian Hall 2025</p>
-    <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
-</footer>
+    <footer>
+        <p>Christian Hall 2025</p>
+        <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
+    </footer>
+    <svg width="0" height="0">
+        <filter id="distort">
+            <feTurbulence 
+                type="fractalNoise" 
+                baseFrequency="0.005" 
+                numOctaves="2" 
+                seed="3" 
+                result="turbulence">
+                <animate 
+                    attributeName="baseFrequency" 
+                    values="0.005; 0.007; 0.005" 
+                    dur="5s" 
+                    repeatCount="indefinite"/>
+            </feTurbulence>
+            <feDisplacementMap 
+                in="SourceGraphic" 
+                in2="turbulence" 
+                scale="8" 
+                xChannelSelector="R" 
+                yChannelSelector="B"/>
+        </filter>
+    </svg>    
 </body>
 </html>
