@@ -1,0 +1,77 @@
+.hourglass-container {
+    position: absolute;
+    display: flex;
+    justify-self: center;
+    width: 800px;
+    height: 2700px;
+    overflow: clip;
+}
+
+.hourglass-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 60%;
+}
+
+.mask-upper { z-index: 9; }
+.mask-lower { z-index: 9; }
+.hourglass-body { z-index: 10; }
+
+.bg-upper {
+    z-index: 2;
+    background: url('/images/game/hourglass/bg-upper.png') no-repeat center/cover;
+}
+
+.bg-lower {
+    z-index: 7;
+    background: url('/images/game/hourglass/bg-lower.png') no-repeat center/cover;
+}
+
+.sand-stream, .sand-stream-2 {
+    z-index: 8;
+}
+
+.sand-stream {
+    animation: flipSandStream 2s infinite linear;
+}
+.sand-stream-2 {
+    animation: flipSandStream 2s infinite linear;
+    animation-delay: -1.5s;
+}
+
+@keyframes flipSandStream {
+    0%, 100% {
+        transform: scaleX(-1);
+    }
+    50% {
+        transform: scaleX(1);
+    }
+}
+
+.sand-upper {
+    z-index: 6;
+    animation: sand-move-upper 12s infinite alternate linear;
+}
+
+.sand-lower {
+    z-index: 8;
+    animation: sand-move-lower 12s infinite alternate linear;
+}
+
+@keyframes sand-move-upper {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(25%); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes sand-move-lower {
+    0% { transform: translateY(25%); opacity: 0; }
+    9% { opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translateY(0); }
+    89% { opacity: 1; }
+    90% {opacity: 0; }
+    100% { transform: translateY(25%); opacity: 0; }
+}

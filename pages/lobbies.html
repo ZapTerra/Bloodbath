@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Bloodbath</title>
@@ -9,24 +8,29 @@
     <meta name="description" content="Humans don’t have hit points, they have blood pressure. Bloodbath is a fast-paced, 2-5 player card game where each player is a blood mage looking to be the last one left standing.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 </head>
-<header>
-    <a href="../index.html">
-        <button>Login</button>
-    </a>
-    <a href="lobbies.html">
-    <button>Lobbies</button>
-    </a>
-    <a href="game.html">
-        <button>Lplay</button>
-    </a>
-    <a href="stats.html">
-        <button>Logistics</button>
-    </a>
-</header>
-
-<body bgcolor="blood">
+<body>
+    <script src="js/script.js"></script>
+    <header>
+        <a href="../index.html">
+            <button id="header-button">Login</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="lobbies.html">
+            <button id="header-button">Lobbies</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="game.html">
+            <button id="header-button">Lplay</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="stats.html">
+            <button id="header-button">Logistics</button>
+        </a>
+    </header>
+    <div id="bar-drip"></div>
+    <main>
     <div id="lobby-container">
         <div id="lobby-list">
             <div class="lobby">
@@ -51,14 +55,33 @@
             </div>
         </div>
     </div>
-
+</main>
     <script src="js/script.js"></script>
+    <footer>
+        <p>Christian Hall 2025</p>
+        <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
+    </footer>
+<svg width="0" height="0">
+    <filter id="distort">
+        <feTurbulence 
+            type="fractalNoise" 
+            baseFrequency="0.005" 
+            numOctaves="2" 
+            seed="3" 
+            result="turbulence">
+            <animate 
+                attributeName="baseFrequency" 
+                values="0.005; 0.007; 0.005" 
+                dur="5s" 
+                repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap 
+            in="SourceGraphic" 
+            in2="turbulence" 
+            scale="8" 
+            xChannelSelector="R" 
+            yChannelSelector="B"/>
+    </filter>
+</svg>    
 </body>
-
-<footer>
-    <p>Christian Hall 2025</p>
-    <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
-</footer>
-
 </html>
-</body>

@@ -8,16 +8,19 @@
          url('/font/alagard.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
-body {
+* {
     font-family: 'Alagard', Fallback, sans-serif;
+}
+
+body {
     margin: 0%;
-    position: relative; /* Ensure it acts as a container for the pseudo-element */
-    overflow: hidden; /* Prevents unwanted scrollbars */
+    position: relative;
+    overflow: hidden;
 }
 
 body::before {
     content: "";
-    position: fixed; /* Keeps background in place */
+    position: fixed;
     top: -5%;
     left: -5%;
     width: 110vw;
@@ -26,28 +29,50 @@ body::before {
     background-color: #F64F4F;
     background-blend-mode: soft-light;
     background-size: 800px;
-    filter: url(#distort); /* Apply SVG filter here */
-    z-index: -1; /* Sends it behind content */
+    filter: url(#distort);
+    z-index: -1;
 }
 
-button {
-    font-family: 'Alagard', Fallback, sans-serif;
+#header-button {
     font-size: 1.5em;
     background-color: transparent;
     border: transparent;
+    transition: .3s;
 }
 
+#header-button:hover {letter-spacing: .5em;}
+
 header {
-    font-family: 'Alagard', Fallback, sans-serif;
     background-color: #780606;
-    padding: 2%;
+    padding: 0%;
+    padding-top: 1%;
     margin: 0%;
     display: flex;
     justify-content:space-evenly;
 }
 
+#header-blood-cell {
+    background-image: url(/images/red-blood-cell.png);
+    background-size: contain;
+    width: 2em;
+    height: 2em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#bar-drip {
+    background-image: url(/images/bar-drip.gif);
+    width: 100%;
+    height: 200px;
+    background-repeat: repeat-x;
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+}
+
 main {
-    margin: 2%;
+    margin: 2.5%;
+    margin-top: 10%;
 }
 
 footer {
@@ -64,12 +89,12 @@ footer {
 
 #login-titleplate {
     color: rgb(50, 0, 0);
-    background-color: #F42929;
-    border-radius: 1em;
+    background-color: #780606;
+    border-radius: .25em;
     padding: .25em;
     margin: 0em;
     margin-left: .25em;
-    box-shadow: 0px 0px 10px .5px black;
+    box-shadow: 5px 0px 2px -2px black inset;
     display: flex;
     width: fit-content;
 }
@@ -79,7 +104,7 @@ form {
     border-radius: 1em;
     padding: 1em;
     padding-bottom: 0;
-    box-shadow: 5px 5px 10px inset;
+    box-shadow: 6px -6px 4px inset;
 }
 
 fieldset {
@@ -94,7 +119,6 @@ fieldset {
 input {
     margin: .5em;
     border-width: 4px;
-    font-family: Alagard;
     text-shadow: 0 0 3px #780606;
 }
 
@@ -132,16 +156,17 @@ input, textarea {
 #login-button {
     color: #780606;
     margin: 1em;
+    padding: .5em;
+    border: .5em outset #EA0C0C;
+    font-size: large;
     background-color: #F64F4F;
     border-radius: .25em;
-    border-color: #F64F4F;
 }
 
 #login-button:active {
-    color: #F64F4F;
-    background-color: #780606;
+    border: .5em ridge #EA0C0C;
     border-radius: .25em;
-    border-color: #780606;
+    text-shadow: 0 0 3px #780606;
 }
 
 
