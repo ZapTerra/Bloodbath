@@ -1,0 +1,10 @@
+#stat-container {
+    padding-top: 6em;
+}
+.stat {
+    background-color: #b10a0a;
+    box-shadow: inset 5px 5px 5px;
+    border-radius: 2em;
+    padding: 1em;
+    margin: 1em;
+}

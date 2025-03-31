@@ -1,0 +1,21 @@
+.lobby {
+    background-color: #b10a0a;
+    box-shadow: inset 5px 5px 5px;
+    border-radius: 2em;
+    padding: 1em;
+    margin: 1em;
+}
+
+.lobby-info {
+
+}
+
+.join-lobby {
+    padding: .75em;
+    border-radius: .5em;
+    color: #200000;
+    background-color: #F64F4F;
+    border-color: #780606;
+    border-width: 7px;
+    font-size: xx-large;
+}

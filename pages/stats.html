@@ -9,27 +9,32 @@
     <meta name="description" content="Humans don’t have hit points, they have blood pressure. Bloodbath is a fast-paced, 2-5 player card game where each player is a blood mage looking to be the last one left standing.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="/css/stats.css" rel="stylesheet">
 </head>
-<header>
-    <a href="../index.html">
-        <button>Login</button>
-    </a>
-    <a href="lobbies.html">
-    <button>Lobbies</button>
-    </a>
-    <a href="game.html">
-        <button>Lplay</button>
-    </a>
-    <a href="stats.html">
-        <button>Logistics</button>
-    </a>
-</header>
-
 <body bgcolor="blood">
+    <script src="js/script.js"></script>
+    <header>
+        <a href="../index.html">
+            <button id="header-button">Login</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="lobbies.html">
+            <button id="header-button">Lobbies</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="game.html">
+            <button id="header-button">Lplay</button>
+        </a>
+        <div id="header-blood-cell"></div>
+        <a href="stats.html">
+            <button id="header-button">Logistics</button>
+        </a>
+    </header>
+    <div id="bar-drip"></div>
     <div id="stat-container">
         <div id="stat-list">
-            <div class="statistic">
+            <div class="stat">
                 <h2 class="stat-name">Play time:</h2>
                 <p class="stat-info">12hrs</p>
             </div>
