@@ -66,6 +66,7 @@ header {
     height: 200px;
     background-repeat: repeat-x;
     display: inline-block;
+    top: 2.35em;
     position: absolute;
     z-index: -1;
 }
