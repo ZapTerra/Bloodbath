@@ -1,19 +1,28 @@
-.hourglass-container {
-    width: 100vw;
-    height: 50vh;
+body {
+    min-height: 100dvh;
+    max-height: 100dvh;
+    max-width: 100dvw;
+    max-width: 100dvw;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    flex-direction: column;
 }
 
-.hourglass-element {
-    top: 10%;
-    position: absolute;
-    width: auto;
-    height: 100%;
-    border-radius: 2em;
-    padding: 2.5em;
+.hourglass-container {
+    flex-grow: 1;
+    width: 100dvw;
+    height: 33dvh;
+    display: grid;
+    grid-template-rows: 100%;
+    justify-content: center;
+    
+}
+
+.hourglass-container > * {
+    min-height: 80%;
+    max-height: 80%;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .mask-upper { z-index: 9; }
@@ -52,12 +61,18 @@
 }
 
 .sand-upper-container, .sand-lower-container {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    padding: 0;
+    grid-template-columns: 100fr;
     width: 100%;
     height: 100%;
+}
+
+.sand-upper-container > *, .sand-lower-container > * {
+    grid-row: 1;
+    grid-column: 1;
+    max-height: 100%;
+    min-height: 100%;
 }
 
 .sand-upper {
@@ -87,11 +102,11 @@
 }
 
 .wound-tracker {
-    margin-top: 8vh;
     background-color: darkred;
     width: auto;
-    height: 15vh;
+    height: 25%;
     display: flex;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
     position: relative;
