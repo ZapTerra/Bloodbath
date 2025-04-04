@@ -74,11 +74,10 @@ header {
     z-index: -1; /* Sends it behind other content */
     pointer-events: none; /* Prevents interaction */
 }
-}
 
 main {
-    margin: 2.5%;
-    margin-top: 10%;
+    margin: 2.5dvh;
+    margin-top: 7dvh;
 }
 
 footer {
@@ -96,6 +95,7 @@ footer {
 
 #login-titleplate {
     color: rgb(50, 0, 0);
+    font-size: xxx-large;
     background-color: #780606;
     border-radius: .25em;
     padding: .25em;
@@ -107,6 +107,7 @@ footer {
 }
 
 form {
+    font-size: xx-large;
     background-color: #780606;
     border-radius: 1em;
     padding: 1em;
@@ -124,8 +125,9 @@ fieldset {
 }
 
 input {
+    font-size: xx-large;
     margin: .5em;
-    border-width: 4px;
+    border-width: 5px;
     text-shadow: 0 0 3px #780606;
 }
 
@@ -165,7 +167,7 @@ input, textarea {
     margin: 1em;
     padding: .5em;
     border: .5em outset #EA0C0C;
-    font-size: large;
+    font-size: xx-large;
     background-color: #F64F4F;
     border-radius: .25em;
 }
