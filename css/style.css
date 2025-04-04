@@ -101,7 +101,7 @@ footer {
     padding: .25em;
     margin: 0em;
     margin-left: .25em;
-    box-shadow: 5px 0px 2px -2px black inset;
+    box-shadow: 6px 4px 10px -1px black inset;
     display: flex;
     width: fit-content;
 }
