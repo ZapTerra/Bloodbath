@@ -1,1 +1,3 @@
 Meters are super cool! I didn't know about them before! Setting the 'optimum' number at the upper or lower third of the range defined by the 'high' and 'low' values makes it go red when the value is all the way in the other third! That's cool!
+
+I learned a whole bunch about css alignments, styles, and effects. I learned about grid alignments and animations for the hourglass effect and svg effects for the awesome blood warble in the background.
