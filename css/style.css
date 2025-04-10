@@ -12,10 +12,13 @@
     font-family: 'Alagard', Fallback, sans-serif;
 }
 
+main {
+    margin-top: 10dvh;
+}
+
 body {
     margin: 0%;
-    position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 body::before {
@@ -75,22 +78,15 @@ header {
     pointer-events: none; /* Prevents interaction */
 }
 
-main {
-    margin: 2.5dvh;
-    margin-top: 7dvh;
-}
-
 footer {
-    padding: 2%;
-    flex-grow: 0;
-    padding-top: 0%;;
     text-align: center;
     text-shadow: 0 0 5px #F64F4F;
     background-image: linear-gradient(90deg,#EA0C0C,#780606,#780606,#780606,#EA0C0C);
     bottom: 0%;
     position: fixed;
-    width: 110%;
-    left: -10%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 #login-titleplate {
