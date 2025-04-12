@@ -1,65 +1,52 @@
-let draining = false;
-let sandLevel = parseFloat(localStorage.getItem('sandLevel')) || 0;
-let woundCount = parseInt(localStorage.getItem('woundCount')) || 0;
+// hourglass.js
 
-const sandUpper = document.querySelector('.sand-upper');
-const sandLower = document.querySelector('.sand-lower');
-const woundCountDisplay = document.querySelector('.wound-count');
-const addBtn = document.querySelector('.add-wounds');
-const subBtn = document.querySelector('.sub-wounds');
+document.addEventListener('DOMContentLoaded', () => {
+  const sandUpper = document.querySelector('.sand-upper');
+  const sandLower = document.querySelector('.sand-lower');
 
-const MAX_VH = 13;
-const BASE_DRAIN_RATE = 1 / 60;
+  // Set initial positions
+  sandUpper.style.transform = 'translateY(0vh)';
+  sandLower.style.transform = 'translateY(11vh)';
+  sandLower.style.opacity = '1';
 
-let lastTime = null;
+  let woundCount = window.currentWoundCount || 0;
+  let progress = 0;
+  let direction = 1;
 
-function updateTransforms() {
-  const upperY = sandLevel * MAX_VH;
-  const lowerY = 11 - upperY;
+  const duration = 60000; // 60 seconds (match your CSS)
+  let startTime = null;
 
-  sandUpper.style.transform = `translateY(${upperY}vh)`;
-  sandLower.style.transform = `translateY(${lowerY}vh)`;
-}
+  const animateSand = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
 
-function updateWoundCountDisplay() {
-  woundCountDisplay.textContent = woundCount;
-}
+    const percent = (elapsed % duration) / duration;
 
-function loop(timestamp) {
-  if (!lastTime) lastTime = timestamp;
-  const delta = (timestamp - lastTime) / 1000;
-  lastTime = timestamp;
+    // Move top sand (0 -> 13vh -> 0)
+    const upperTranslate = percent < 0.5
+      ? 13 * (percent * 2)
+      : 13 * (1 - ((percent - 0.5) * 2));
+    sandUpper.style.transform = `translateY(${upperTranslate.toFixed(2)}vh)`;
 
-  if (draining && sandLevel < 1) {
-    const rate = BASE_DRAIN_RATE * woundCount;
-    sandLevel += rate * delta;
-    sandLevel = Math.min(1, sandLevel);
-    localStorage.setItem('sandLevel', sandLevel);
-    updateTransforms();
-  }
+    // Move lower sand (11 -> -2vh -> 11)
+    const lowerTranslate = percent < 0.5
+      ? 11 - (13 * (percent * 2)) // 11 -> -2vh
+      : -2 + (13 * ((percent - 0.5) * 2)); // -2 -> 11
+    sandLower.style.transform = `translateY(${lowerTranslate.toFixed(2)}vh)`;
 
-  requestAnimationFrame(loop);
-}
+    // Keep it visible during the whole cycle (based on opacity stops in your keyframes)
+    sandLower.style.opacity = '1';
 
-document.addEventListener('click', (e) => {
-  // Ignore clicks on UI elements
-  if (e.target.closest('.wound-tracker')) return;
-  draining = !draining;
+    requestAnimationFrame(animateSand);
+  };
+
+  requestAnimationFrame(animateSand);
+
+  // Optional: if woundCount changes dynamically
+  window.addEventListener('woundCountChanged', (e) => {
+    woundCount = e.detail.woundCount;
+    // You can modify `duration` or sand speed here if you want:
+    // For example:
+    // duration = 60000 / (1 + woundCount * 0.1);
+  });
 });
-
-addBtn.addEventListener('click', () => {
-  woundCount = Math.min(woundCount + 1, 99);
-  localStorage.setItem('woundCount', woundCount);
-  updateWoundCountDisplay();
-});
-
-subBtn.addEventListener('click', () => {
-  woundCount = Math.max(woundCount - 1, 0);
-  localStorage.setItem('woundCount', woundCount);
-  updateWoundCountDisplay();
-});
-
-// On load
-updateTransforms();
-updateWoundCountDisplay();
-requestAnimationFrame(loop);
