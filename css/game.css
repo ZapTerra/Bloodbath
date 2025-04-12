@@ -78,15 +78,15 @@ body {
 
 .sand-upper {
     z-index: 6;
-    animation: sand-move-upper 60s infinite alternate linear;
+    /* animation: sand-move-upper 60s infinite alternate linear; */
 }
 
 .sand-lower {
     z-index: 8;
-    animation: sand-move-lower 60s infinite alternate linear;
+    /* animation: sand-move-lower 60s infinite alternate linear; */
 }
 
-@keyframes sand-move-upper {
+/* @keyframes sand-move-upper {
     0% { transform: translateY(0vh); }
     50% { transform: translateY(13vh); }
     100% { transform: translateY(0vh); }
@@ -100,7 +100,15 @@ body {
     84% { opacity: 1; }
     85% { opacity: 1; }
     100% { transform: translateY(11vh); opacity: 1; }
-}
+} */
+
+.wound-increment {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
 
 .wound-tracker {
     background-color: darkred;
@@ -121,6 +129,15 @@ body {
     -ms-interpolation-mode: nearest-neighbor;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.wound-increment img {
+    width: 3dvw;
+    pointer-events: none;
 }
 
 .sub-wounds {

@@ -1,17 +1,39 @@
+import { useEffect, useState } from 'react';
 import '../css/style.css';
 import '../css/game.css';
 
 function Game() {
+  const [woundCount, setWoundCount] = useState(() => {
+    return parseInt(localStorage.getItem('woundCount')) || 0;
+  });
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '/hourglass.js';
+    script.defer = true;
+    document.body.appendChild(script);
+
+    window.currentWoundCount = woundCount;
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('woundCount', woundCount);
+
+    window.currentWoundCount = woundCount;
+
+    const event = new CustomEvent('woundCountChanged', { detail: { woundCount } });
+    window.dispatchEvent(event);
+  }, [woundCount]);
+
+  const incrementWounds = () => setWoundCount(w => Math.min(w + 1, 99));
+  const decrementWounds = () => setWoundCount(w => Math.max(w - 1, 0));
+
   return (
     <>
-      {/* 
-      <div id="special-actions">
-        <button>Blood Drive</button>
-        <button>Hemokeratosis</button>
-        <button>Plasma Barrier</button>
-      </div> 
-      */}
-
       <div className="hourglass-container">
         <img src="/images/game/hourglass/hourglass-body.png" className="hourglass-body" alt="" />
         <img src="/images/game/hourglass/bg-upper.png" className="bg-upper" alt="" />
@@ -32,9 +54,13 @@ function Game() {
       </div>
 
       <div className="wound-tracker">
-        <img src="../images/game/arrow.png" className="wound-increment sub-wounds" alt="" />
-        <span className="wound-count">5</span>
-        <img src="../images/game/arrow.png" className="wound-increment add-wounds" alt="" />
+        <button className="wound-increment sub-wounds" onClick={decrementWounds}>
+          <img src="../images/game/arrow.png" alt="Decrease Wound" />
+        </button>
+        <span className="wound-count">{woundCount}</span>
+        <button className="wound-increment add-wounds" onClick={incrementWounds}>
+          <img src="../images/game/arrow.png" alt="Increase Wound" />
+        </button>
       </div>
 
       <svg width="0" height="0">
