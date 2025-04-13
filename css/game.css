@@ -102,14 +102,6 @@ body {
     100% { transform: translateY(11vh); opacity: 1; }
 } */
 
-.wound-increment {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  
-
 .wound-tracker {
     background-color: darkred;
     width: auto;
@@ -124,8 +116,8 @@ body {
 }
 
 .wound-increment {
-    width: 5vh;
-    height: auto;
+    height: 10em;
+    width: 7em;
     -ms-interpolation-mode: nearest-neighbor;
     image-rendering: crisp-edges;
     image-rendering: pixelated;

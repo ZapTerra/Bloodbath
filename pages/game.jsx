@@ -8,19 +8,6 @@ function Game() {
   });
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = './public/hourglass.js';
-    script.defer = true;
-    document.body.appendChild(script);
-
-    window.currentWoundCount = woundCount;
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem('woundCount', woundCount);
 
     window.currentWoundCount = woundCount;
@@ -29,71 +16,94 @@ function Game() {
     window.dispatchEvent(event);
   }, [woundCount]);
 
-  const incrementWounds = () => setWoundCount(w => Math.min(w + 1, 99));
-  const decrementWounds = () => setWoundCount(w => Math.max(w - 1, 0));
+  const incrementWounds = (e) => {
+    e.stopPropagation();
+    setWoundCount(w => Math.min(w + 1, 99));
+  };
+  
+  const decrementWounds = (e) => {
+    e.stopPropagation();
+    setWoundCount(w => Math.max(w - 1, 0));
+  };  
 
   useEffect(() => {
+    const fullTank = 60000;
     let animationFrameId;
-    let startTime = null;
-    let started = false;
+    let lastTimestamp = null;
+  
+    let bloodPressure = parseFloat(localStorage.getItem('bloodPressure')) || fullTank;
+    let isDraining = false;
   
     const sandUpper = document.querySelector('.sand-upper');
     const sandLower = document.querySelector('.sand-lower');
-  
     if (!sandUpper || !sandLower) return;
   
-    const animateSand = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-  
-      const woundCount = window.currentWoundCount || 0;
-      const speedFactor = 1 + woundCount * 0.1;
-      const duration = 60000 / speedFactor;
-  
-      const percent = (elapsed % duration) / duration;
-  
-      const upperTranslate = percent < 0.5
-        ? 13 * (percent * 2)
-        : 13 * (1 - ((percent - 0.5) * 2));
+    const updateSand = () => {
+      const percent = Math.max(0, Math.min(bloodPressure / fullTank, 1));
+    
+      const upperTranslate = 13 * (1 - percent);
       sandUpper.style.transform = `translateY(${upperTranslate.toFixed(2)}vh)`;
-  
-      const lowerTranslate = percent < 0.5
-        ? 11 - (13 * (percent * 2))
-        : -2 + (13 * ((percent - 0.5) * 2));
+    
+      const lowerTranslate = 11 - (13 * (1 - percent));
       sandLower.style.transform = `translateY(${lowerTranslate.toFixed(2)}vh)`;
+    
       sandLower.style.opacity = '1';
-  
-      animationFrameId = requestAnimationFrame(animateSand);
     };
   
-    const stopAnimation = () => {
-      cancelAnimationFrame(animationFrameId);
+    const animate = (timestamp) => {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+    
+      const woundCount = window.currentWoundCount || 0;
+      const speedFactor = woundCount * 0.1;
+    
+      bloodPressure -= delta * speedFactor;
+      bloodPressure = Math.max(0, bloodPressure);
+      localStorage.setItem('bloodPressure', bloodPressure.toFixed(2));
+    
+      updateSand();
+    
+      if (bloodPressure > 0) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        stopDrain();
+      }
+    };
+  
+    const startDrain = () => {
+      if (!isDraining && bloodPressure > 0) {
+        isDraining = true;
+        lastTimestamp = null;
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+  
+    const stopDrain = () => {
+      isDraining = false;
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
       animationFrameId = null;
-      startTime = null;
+      lastTimestamp = null;
     };
   
     const onClick = (e) => {
-      if (
-        e.target.closest('button') ||
-        e.target.closest('.wound-tracker')
-      ) return;
+      if (e.target.closest('button') || e.target.closest('.wound-tracker')) return;
   
-      if (!started) {
-        started = true;
-        requestAnimationFrame(animateSand);
+      if (!isDraining) {
+        startDrain();
       } else {
-        started = false;
-        stopAnimation();
+        stopDrain();
       }
     };
   
     document.addEventListener('click', onClick);
+    updateSand();
   
     return () => {
       document.removeEventListener('click', onClick);
-      stopAnimation();
+      stopDrain();
     };
-  }, []);  
+  }, []);
 
   return (
     <>
