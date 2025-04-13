@@ -9,7 +9,7 @@ function Game() {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = '/hourglass.js';
+    script.src = './public/hourglass.js';
     script.defer = true;
     document.body.appendChild(script);
 
@@ -31,6 +31,69 @@ function Game() {
 
   const incrementWounds = () => setWoundCount(w => Math.min(w + 1, 99));
   const decrementWounds = () => setWoundCount(w => Math.max(w - 1, 0));
+
+  useEffect(() => {
+    let animationFrameId;
+    let startTime = null;
+    let started = false;
+  
+    const sandUpper = document.querySelector('.sand-upper');
+    const sandLower = document.querySelector('.sand-lower');
+  
+    if (!sandUpper || !sandLower) return;
+  
+    const animateSand = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+  
+      const woundCount = window.currentWoundCount || 0;
+      const speedFactor = 1 + woundCount * 0.1;
+      const duration = 60000 / speedFactor;
+  
+      const percent = (elapsed % duration) / duration;
+  
+      const upperTranslate = percent < 0.5
+        ? 13 * (percent * 2)
+        : 13 * (1 - ((percent - 0.5) * 2));
+      sandUpper.style.transform = `translateY(${upperTranslate.toFixed(2)}vh)`;
+  
+      const lowerTranslate = percent < 0.5
+        ? 11 - (13 * (percent * 2))
+        : -2 + (13 * ((percent - 0.5) * 2));
+      sandLower.style.transform = `translateY(${lowerTranslate.toFixed(2)}vh)`;
+      sandLower.style.opacity = '1';
+  
+      animationFrameId = requestAnimationFrame(animateSand);
+    };
+  
+    const stopAnimation = () => {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+      startTime = null;
+    };
+  
+    const onClick = (e) => {
+      if (
+        e.target.closest('button') ||
+        e.target.closest('.wound-tracker')
+      ) return;
+  
+      if (!started) {
+        started = true;
+        requestAnimationFrame(animateSand);
+      } else {
+        started = false;
+        stopAnimation();
+      }
+    };
+  
+    document.addEventListener('click', onClick);
+  
+    return () => {
+      document.removeEventListener('click', onClick);
+      stopAnimation();
+    };
+  }, []);  
 
   return (
     <>

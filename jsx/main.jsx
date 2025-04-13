@@ -13,8 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
     </BrowserRouter>
     <footer>
-        <p2>Christian Hall 2025</p2>
-        <br></br>
+        <h4>Christian Hall 2025</h4>
         <a href="https://github.com/ZapTerra/Bloodbath/">GitHub</a>
         <br></br>
         <a href="https://zapdonterra.itch.io/ffxxi">Ribbit!</a>
