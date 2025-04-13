@@ -36,6 +36,8 @@ function Game() {
   
     const sandUpper = document.querySelector('.sand-upper');
     const sandLower = document.querySelector('.sand-lower');
+    const sandStream = document.querySelector('.sand-stream');
+    const sandStream2 = document.querySelector('.sand-stream-2');
     if (!sandUpper || !sandLower) return;
   
     const updateSand = () => {
@@ -76,6 +78,8 @@ function Game() {
         isDraining = true;
         lastTimestamp = null;
         animationFrameId = requestAnimationFrame(animate);
+        sandStream.style.opacity = '1';
+        sandStream2.style.opacity = '1';
       }
     };
   
@@ -84,6 +88,8 @@ function Game() {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
       animationFrameId = null;
       lastTimestamp = null;
+      sandStream.style.opacity = '0';
+        sandStream2.style.opacity = '0';
     };
   
     const onClick = (e) => {
@@ -127,13 +133,21 @@ function Game() {
       </div>
 
       <div className="wound-tracker">
-        <button className="wound-increment sub-wounds" onClick={decrementWounds}>
-          <img src="../images/game/arrow.png" alt="Decrease Wound" />
-        </button>
-        <span className="wound-count">{woundCount}</span>
-        <button className="wound-increment add-wounds" onClick={incrementWounds}>
-          <img src="../images/game/arrow.png" alt="Increase Wound" />
-        </button>
+        <div className="wound-button-wrapper">
+          <button className="wound-increment sub-wounds" onClick={decrementWounds}>
+            <img src="../images/game/arrow.png" alt="Decrease Wound" />
+          </button>
+        </div>
+
+        <div className="wound-count-wrapper">
+          <span className="wound-count">{woundCount}</span>
+        </div>
+
+        <div className="wound-button-wrapper">
+          <button className="wound-increment add-wounds" onClick={incrementWounds}>
+            <img src="../images/game/arrow.png" alt="Increase Wound" />
+          </button>
+        </div>
       </div>
 
       <svg width="0" height="0">

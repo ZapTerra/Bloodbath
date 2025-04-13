@@ -107,28 +107,62 @@ body {
     width: auto;
     height: 5%;
     display: flex;
-    flex-grow: .75;
-    margin-bottom: 5dvh;
-    margin-top: 0;
     justify-content: center;
     align-items: center;
+    gap: 2dvw;
+    margin-bottom: 5dvh;
+    margin-top: 0;
     position: relative;
 }
 
+.wound-button-wrapper {
+    min-width: 7ch;
+    min-height: 7ch;
+    max-width: 7ch;
+    max-height: 7ch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.wound-count-wrapper {
+    min-width: 9ch;
+    max-width: 9ch;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.wound-count {
+    font-size: 7em;
+    line-height: 1;
+}
+
 .wound-increment {
-    height: 10em;
-    width: 7em;
+    width: 7ch;
+    height:  7ch;
+    min-width: 7ch;
+    min-height: 7ch;
     -ms-interpolation-mode: nearest-neighbor;
     image-rendering: crisp-edges;
     image-rendering: pixelated;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
 }
 
+
 .wound-increment img {
-    width: 3dvw;
+    width: 7ch;
     pointer-events: none;
 }
 
