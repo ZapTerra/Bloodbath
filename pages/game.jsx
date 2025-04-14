@@ -2,6 +2,19 @@ import { useEffect, useState } from 'react';
 import '../css/style.css';
 import '../css/game.css';
 
+// hourglass
+import hourglassBody from '../images/game/hourglass/hourglass-body.png';
+import bgUpper from '../images/game/hourglass/bg-upper.png';
+import bgLower from '../images/game/hourglass/bg-lower.png';
+import sandStream from '../images/game/hourglass/sand-stream.png';
+import sandUpper from '../images/game/hourglass/sand-upper.png';
+import sandLower from '../images/game/hourglass/sand-lower.png';
+import maskUpper from '../images/game/hourglass/mask-upper.png';
+import maskLower from '../images/game/hourglass/mask-lower.png';
+
+// wound increment arrow
+import arrowImg from '../images/game/arrow.png';
+
 function Game() {
   const [woundCount, setWoundCount] = useState(() => {
     return parseInt(localStorage.getItem('woundCount')) || 0;
@@ -138,28 +151,28 @@ function Game() {
   return (
     <>
       <div className="hourglass-container">
-        <img src="/images/game/hourglass/hourglass-body.png" className="hourglass-body" alt="" />
-        <img src="/images/game/hourglass/bg-upper.png" className="bg-upper" alt="" />
-        <img src="/images/game/hourglass/bg-lower.png" className="bg-lower" alt="" />
-        <img src="/images/game/hourglass/sand-stream.png" className="sand-stream" alt="" />
-        <img src="/images/game/hourglass/sand-stream.png" className="sand-stream-2" alt="" />
+        <img src={hourglassBody} className="hourglass-body" alt="" />
+        <img src={bgUpper} className="bg-upper" alt="" />
+        <img src={bgLower} className="bg-lower" alt="" />
+        <img src={sandStream} className="sand-stream" alt="" />
+        <img src={sandStream} className="sand-stream-2" alt="" />
 
         <div className="sand-upper-container">
-          <img src="/images/game/hourglass/sand-upper.png" className="sand-upper" alt="" />
+          <img src={sandUpper} className="sand-upper" alt="" />
         </div>
 
         <div className="sand-lower-container">
-          <img src="/images/game/hourglass/sand-lower.png" className="sand-lower" alt="" />
+          <img src={sandLower} className="sand-lower" alt="" />
         </div>
 
-        <img src="/images/game/hourglass/mask-upper.png" className="mask-upper" alt="" />
-        <img src="/images/game/hourglass/mask-lower.png" className="mask-lower" alt="" />
+        <img src={maskUpper} className="mask-upper" alt="" />
+        <img src={maskLower} className="mask-lower" alt="" />
       </div>
       <div className="death-verse"></div>
       <div className="wound-tracker">
         <div className="wound-button-wrapper">
           <button className="wound-increment sub-wounds" onClick={decrementWounds}>
-            <img src="../images/game/arrow.png" alt="Decrease Wound" />
+            <img src={arrowImg} alt="Decrease Wound" />
           </button>
         </div>
 
@@ -169,7 +182,7 @@ function Game() {
 
         <div className="wound-button-wrapper">
           <button className="wound-increment add-wounds" onClick={incrementWounds}>
-            <img src="../images/game/arrow.png" alt="Increase Wound" />
+            <img src={arrowImg} alt="Increase Wound" />
           </button>
         </div>
       </div>
