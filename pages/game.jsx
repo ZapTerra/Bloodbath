@@ -17,13 +17,17 @@ function Game() {
   }, [woundCount]);
 
   const incrementWounds = (e) => {
-    e.stopPropagation();
-    setWoundCount(w => Math.min(w + 1, 99));
+    if(parseFloat(localStorage.getItem('bloodPressure')) > 0) {
+      e.stopPropagation();
+      setWoundCount(w => Math.min(w + 1, 99));
+    }
   };
   
   const decrementWounds = (e) => {
-    e.stopPropagation();
-    setWoundCount(w => Math.max(w - 1, 0));
+    if(parseFloat(localStorage.getItem('bloodPressure')) > 0) {
+      e.stopPropagation();
+      setWoundCount(w => Math.max(w - 1, 0));
+    }
   };  
 
   useEffect(() => {
@@ -89,7 +93,23 @@ function Game() {
       animationFrameId = null;
       lastTimestamp = null;
       sandStream.style.opacity = '0';
-        sandStream2.style.opacity = '0';
+      sandStream2.style.opacity = '0';
+      if (bloodPressure <= 0){
+        const url = "https://bible-api.com/data/web/random";
+        fetch(url)
+          .then((x) => x.json())
+          .then((response) => {
+            const verseOrigin1 = response?.random_verse?.book || "No verse found.";
+            const verseOrigin2 = response?.random_verse?.chapter || "No verse found.";
+            const verseOrigin3 = response?.random_verse?.verse || "No verse found.";
+            const verseText = response?.random_verse?.text || "No verse found.";
+            const woundCount = document.querySelector(".wound-count");
+            if (woundCount) {
+              woundCount.textContent = "(" + verseOrigin1 + " " + verseOrigin2 + ":" + verseOrigin3 + ") : " + verseText.replaceAll("Yahweh", "God");
+              woundCount.style.fontSize = "0.75em";
+            }
+          });
+      }
     };
   
     const onClick = (e) => {
@@ -131,7 +151,7 @@ function Game() {
         <img src="/images/game/hourglass/mask-upper.png" className="mask-upper" alt="" />
         <img src="/images/game/hourglass/mask-lower.png" className="mask-lower" alt="" />
       </div>
-
+      <pre></pre>
       <div className="wound-tracker">
         <div className="wound-button-wrapper">
           <button className="wound-increment sub-wounds" onClick={decrementWounds}>
