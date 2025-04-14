@@ -102,6 +102,27 @@ body {
     100% { transform: translateY(11vh); opacity: 1; }
 } */
 
+.death-verse {
+    font-size: x-large;
+    font-family: 'Alagard';
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    width: fit-content;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px hsl(50, 100%, 45%), 0 0 40px #e6b800, 0 0 50px #e6c700, 0 0 60px #e6c700, 0 0 70px #e6b000;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px rgb(255, 240, 77), 0 0 40px #ffe44d, 0 0 50px #ffea4d, 0 0 60px #ffc74d, 0 0 70px #ffd84d, 0 0 80px #fff64d;
+    }
+}
+
 .wound-tracker {
     background-color: darkred;
     width: auto;
@@ -159,7 +180,6 @@ body {
     padding: 0;
     cursor: pointer;
 }
-
 
 .wound-increment img {
     width: 7ch;

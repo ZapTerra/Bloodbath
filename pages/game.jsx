@@ -103,10 +103,14 @@ function Game() {
             const verseOrigin2 = response?.random_verse?.chapter || "No verse found.";
             const verseOrigin3 = response?.random_verse?.verse || "No verse found.";
             const verseText = response?.random_verse?.text || "No verse found.";
+            const eulogy = document.querySelector(".death-verse");
+            if (eulogy) {
+              eulogy.textContent = "~(" + verseOrigin1 + " " + verseOrigin2 + ":" + verseOrigin3 + ") : " + verseText.replaceAll("Yahweh", "God") + "~";
+            }
             const woundCount = document.querySelector(".wound-count");
             if (woundCount) {
-              woundCount.textContent = "(" + verseOrigin1 + " " + verseOrigin2 + ":" + verseOrigin3 + ") : " + verseText.replaceAll("Yahweh", "God");
-              woundCount.style.fontSize = "0.75em";
+              woundCount.style.fontSize = "4em";
+              woundCount.textContent = "~UwU~";
             }
           });
       }
@@ -151,7 +155,7 @@ function Game() {
         <img src="/images/game/hourglass/mask-upper.png" className="mask-upper" alt="" />
         <img src="/images/game/hourglass/mask-lower.png" className="mask-lower" alt="" />
       </div>
-      <pre></pre>
+      <div className="death-verse"></div>
       <div className="wound-tracker">
         <div className="wound-button-wrapper">
           <button className="wound-increment sub-wounds" onClick={decrementWounds}>
