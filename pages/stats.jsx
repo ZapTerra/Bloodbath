@@ -12,6 +12,10 @@ function Stats() {
                     <p class="stat-info">12hrs</p>
                 </div>
                 <div class="stat">
+                    <h2 class="stat-name">Global blood departure:</h2>
+                    <p class="stat-info">19000kL</p>
+                </div>
+                <div class="stat">
                     <h2 class="stat-name">Wounds taken:</h2>
                     <p class="stat-info">129w</p>
                 </div>
@@ -25,15 +29,15 @@ function Stats() {
                 </div>
                 <div class="stat">
                     <h2 class="stat-name">Liters of blood stolen:</h2>
-                    <p class="stat-info">47L</p>
+                    <p class="stat-info">Forthcoming!</p>
                 </div>
                 <div class="stat">
                     <h2 class="stat-name">Casters Outlasted:</h2>
-                    <p class="stat-info">29</p>
+                    <p class="stat-info">Forthcoming!</p>
                 </div>
                 <div class="stat">
                     <h2 class="stat-name">Battles Won:</h2>
-                    <p class="stat-info">5</p>
+                    <p class="stat-info">Forthcoming!</p>
                 </div>
             </div>
         </div>

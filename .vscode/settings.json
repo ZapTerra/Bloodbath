@@ -2,5 +2,11 @@
     "workbench.colorCustomizations": {
         "minimap.background": "#00000050",
         "scrollbar.shadow": "#00000050"
+    },
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
     }
 }
