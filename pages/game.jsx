@@ -16,6 +16,9 @@ import maskLower from '../public/game/hourglass/mask-lower.png';
 import arrowImg from '../public/game/arrow.png';
 
 function Game() {
+  const [sessionBloodLost, setPendingBloodLost] = useState(0);
+  const [sessionWoundsAdded, setPendingWoundsAdded] = useState(0);
+  const [sessionWoundsHealed, setPendingWoundsHealed] = useState(0);
   
   const [woundCount, setWoundCount] = useState(() => {
     return parseInt(localStorage.getItem('woundCount')) || 0;
@@ -31,18 +34,24 @@ function Game() {
   }, [woundCount]);
 
   const incrementWounds = (e) => {
-    if(parseFloat(localStorage.getItem('bloodPressure')) > 0) {
+    if (parseFloat(localStorage.getItem('bloodPressure')) > 0) {
       e.stopPropagation();
-      setWoundCount(w => Math.min(w + 1, 99));
+      setWoundCount((w) => {
+        setPendingWoundsAdded((prev) => prev + 1);
+        return Math.min(w + 1, 99);
+      });
     }
   };
   
   const decrementWounds = (e) => {
-    if(parseFloat(localStorage.getItem('bloodPressure')) > 0) {
+    if (parseFloat(localStorage.getItem('bloodPressure')) > 0) {
       e.stopPropagation();
-      setWoundCount(w => Math.max(w - 1, 0));
+      setWoundCount((w) => {
+        if (w > 0) setPendingWoundsHealed((prev) => prev + 1);
+        return Math.max(w - 1, 0);
+      });
     }
-  };  
+  };
 
   useEffect(() => {
     const fullTank = 60000;
@@ -78,7 +87,10 @@ function Game() {
       const woundCount = window.currentWoundCount || 0;
       const speedFactor = woundCount * 0.1;
     
+      const pressureBefore = bloodPressure;
       bloodPressure -= delta * speedFactor;
+      const actualLoss = Math.max(0, pressureBefore - bloodPressure);
+      setPendingBloodLost((prev) => prev + actualLoss);
       bloodPressure = Math.max(0, bloodPressure);
       localStorage.setItem('bloodPressure', bloodPressure.toFixed(2));
     
@@ -108,6 +120,24 @@ function Game() {
       lastTimestamp = null;
       sandStream.style.opacity = '0';
       sandStream2.style.opacity = '0';
+
+      //convert to liters lol
+      const bloodLiters = (sessionBloodLost / 60000 * 2).toFixed(2);
+
+      fetch("https://your.api/endpoint/stats", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          bloodLostLiters: parseFloat(bloodLiters),
+          woundsAdded: sessionWoundsAdded,
+          woundsHealed: sessionWoundsHealed
+        }),
+      }).catch((err) => console.error("Failed to post stats:", err));
+    
+      setPendingBloodLost(0);
+      setPendingWoundsAdded(0);
+      setPendingWoundsHealed(0);
+
       if (bloodPressure <= 0){
         const url = "https://bible-api.com/data/web/random";
         fetch(url)

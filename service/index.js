@@ -17,7 +17,7 @@ app.use(express.json());
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-//I do hereby solemnly swear that I am very carefully reading through the Simon code to make sure I understand everything that is happening at this level
+//I do hereby solemnly swear that I am very carefully reading through the Simon code to make sure I understand what is happening at this level
 const createMage = async (mageName, password) => {
   const mage = {
     mageName,
@@ -98,15 +98,6 @@ apiRouter.post('/stats/me', verifyAuth, async (req, res) => {
 
 apiRouter.get('/stats/global', (_req, res) => {
   res.send(globalStats);
-});
-
-app.post('/cookie/:name/:value', (req, res, next) => {
-  res.cookie(req.params.name, req.params.value);
-  res.send({ cookie: `${req.params.name}:${req.params.value}` });
-});
-
-app.get('/cookie', (req, res, next) => {
-  res.send({ cookie: req.cookies });
 });
 
 app.get('/error', (req, res, next) => {
