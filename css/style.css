@@ -125,6 +125,7 @@ input {
     margin: .5em;
     border-width: 5px;
     text-shadow: 0 0 3px #780606;
+    width: 50dvw;
 }
 
 input:focus {

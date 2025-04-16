@@ -9,6 +9,12 @@ const PORT = 8080;
 let mages = [];
 let stats = [];
 
+let globalStats = {
+  totalBloodLost: 0,
+};
+
+const authCookieName = 'mage_auth';
+
 const port = process.argv.length > 2 ? process.argv[2] : 8080;
 
 app.use(cookieParser());
@@ -18,10 +24,10 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 //I do hereby solemnly swear that I am very carefully reading through the Simon code to make sure I understand what is happening at this level
-const createMage = async (mageName, password) => {
+const createMage = async (mageName, passphrase) => {
   const mage = {
     mageName,
-    password: await bcrypt.hash(password, 10),
+    passphrase: await bcrypt.hash(passphrase, 10),
     token: uuid.v4(),
   };
   mages.push(mage);
@@ -34,17 +40,36 @@ const createMage = async (mageName, password) => {
   return mage;
 };
 
+apiRouter.post('/auth/register', async (req, res) => {
+  if (await findMage('mageName', req.body.mageName)) {
+    return res.status(409).send({ msg: 'YE WOULD TO TAKE THE NAME OF ANOTHER WARLOCK>!>! CUR UPON THEE!!!4' });
+  }
+
+  const user = await createMage(req.body.mageName, req.body.passphrase);
+  setAuthCookie(res, user.token);
+
+  res.status(201).send({
+    success: true,
+    msg: `WELCOME, ${user.mageName.toUpperCase()}!`,
+    mageName: user.mageName,
+  });
+});
+
 apiRouter.post('/auth/login', async (req, res) => {
   const mage = await findMage('mageName', req.body.mageName);
-  if (mage) {
-    if (await bcrypt.compare(req.body.password, mage.password)) {
-      mage.token = uuid.v4();
-      setAuthCookie(res, mage.token);
-      res.send({ mageName: mage.mageName });
-      return;
-    }
+
+  if (mage && await bcrypt.compare(req.body.passphrase, mage.passphrase)) {
+    mage.token = uuid.v4();
+    setAuthCookie(res, mage.token);
+
+    return res.status(200).send({
+      success: true,
+      msg: `OPEN UNTO YOU, ${mage.mageName.toUpperCase()}!`,
+      mageName: mage.mageName,
+    });
   }
-  res.status(401).send({ msg: 'Unauthorized' });
+
+  res.status(401).send({ success: false, msg: 'WOE! PLAGUE BE UPON YE! A THOUSAND CURSES!' });
 });
 
 //How does this know if it's the *right* user though?
@@ -100,12 +125,28 @@ apiRouter.get('/stats/global', (_req, res) => {
   res.send(globalStats);
 });
 
+async function findMage(field, value) {
+  if (!value) return null;
+
+  return mages.find((u) => u[field] === value);
+}
+
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
 app.get('/error', (req, res, next) => {
   throw new Error('206: Out of Bones');
 });
 
 app.use(function (err, req, res, next) {
-  res.status(500).send({ type: err.name, message: err.message });
+  res.status(206).send({ type: err.name, message: err.message });
 });
 
 app.use(express.static(path.join(__dirname, '..', 'dist')));
