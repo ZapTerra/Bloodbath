@@ -94,7 +94,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 apiRouter.get('/stats', (req, res) => {
   if (!req.cookies[authCookieName]) {
-    return res.redirect('/unauthorized');
+    return res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
@@ -124,10 +124,6 @@ apiRouter.post('/stats/me', verifyAuth, async (req, res) => {
     }
   }
   res.send(mageStats);
-});
-
-apiRouter.get('/stats', verifyAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, 'unauthorized.html'));
 });
 
 apiRouter.get('/stats/global', (_req, res) => {

@@ -36,7 +36,7 @@ function Stats() {
 
     useEffect(() => {
         if (authError) {
-            navigate('/error');
+            navigate('/unauthorized');
         }
     }, [authError, navigate]);
 
