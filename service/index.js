@@ -50,7 +50,7 @@ apiRouter.post('/auth/register', async (req, res) => {
 
   res.status(201).send({
     success: true,
-    msg: `WELCOME, ${user.mageName.toUpperCase()}!`,
+    msg: `WELCOME, ${user.mageName}!`,
     mageName: user.mageName,
   });
 });
@@ -92,6 +92,12 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   res.status(204).end();
 });
 
+apiRouter.get('/stats', (req, res) => {
+  if (!req.cookies[authCookieName]) {
+    return res.redirect('/unauthorized');
+  }
+});
+
 apiRouter.get('/stats/me', verifyAuth, async (req, res) => {
   const mage = await findMage('token', req.cookies[authCookieName]);
   if (mage && stats[mage.mageName]) {
@@ -117,8 +123,11 @@ apiRouter.post('/stats/me', verifyAuth, async (req, res) => {
       }
     }
   }
-
   res.send(mageStats);
+});
+
+apiRouter.get('/stats', verifyAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, 'unauthorized.html'));
 });
 
 apiRouter.get('/stats/global', (_req, res) => {

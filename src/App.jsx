@@ -6,6 +6,7 @@ import Login from '../pages/login';
 import Lobbies from '../pages/lobbies';
 import Game from '../pages/game';
 import Stats from '../pages/stats';
+import Unauthorized from '../pages/unauthorized';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/lobbies" element={<Lobbies />} />
           <Route path="/play" element={<Game />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
         </Routes>
       </main>
       <svg width="0" height="0">

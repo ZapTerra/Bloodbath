@@ -33,7 +33,7 @@ body::before {
     background-blend-mode: soft-light;
     background-size: 800px;
     filter: url(#distort);
-    z-index: -1;
+    z-index: -100;
 }
 
 #header-button {
@@ -69,13 +69,13 @@ header {
     width: 100%;
     height: 25dvh;
     background-repeat: repeat-x;
-    background-size: auto 100%; /* Maintains full height without cropping */
-    background-position: top; /* Aligns to the top */
-    position: absolute; /* Keeps it out of document flow */
-    top: 100%; /* Places it right under the header */
+    background-size: auto 100%;
+    background-position: top;
+    position: absolute;
+    top: 100%;
     left: 0;
-    z-index: -1; /* Sends it behind other content */
-    pointer-events: none; /* Prevents interaction */
+    z-index: -1;
+    pointer-events: none;
 }
 
 footer {
