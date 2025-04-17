@@ -5,7 +5,7 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Express Server",
-        "program": "${workspaceFolder}/server/index.js", // or server.js or whatever your entry file is
+        "program": "${workspaceFolder}/service/index.js", // or server.js or whatever your entry file is
         "runtimeArgs": ["--nolazy"],
         "console": "integratedTerminal",
         "skipFiles": ["<node_internals>/**"]

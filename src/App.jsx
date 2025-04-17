@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import '../css/style.css';
+import './css/style.css';
 
-import Header from '../pages/header';
-import Login from '../pages/login';
-import Lobbies from '../pages/lobbies';
-import Game from '../pages/game';
-import Stats from '../pages/stats';
-import Unauthorized from '../pages/unauthorized';
+import Header from './pages/header';
+import Login from './pages/login';
+import Lobbies from './pages/lobbies';
+import Game from './pages/game';
+import Stats from './pages/stats';
+import Unauthorized from './pages/unauthorized';
 
 export default function App() {
   return (
